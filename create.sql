@@ -55,3 +55,30 @@ CREATE TABLE Clients (
 CREATE USER 'activity_client'@'%' IDENTIFIED BY 'Password';
 GRANT CREATE, SELECT, INSERT, DELETE ON  naat_clients. * TO 'activity_client'@'%';
 FLUSH PRIVILEGES;
+
+
+/*
+*    NEWS DATABASE
+*/
+CREATE DATABASE naat_news;
+USE naat_news;
+CREATE TABLE News(
+    news_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
+    headline VARCHAR(200) NOT NULL,
+    summary VARCHAR(300) NOT NULL,
+    news_body VARCHAR(500) NOT NULL,
+    image VARCHAR(100),
+    creation_date TIMESTAMP(3),
+    modification_date TIMESTAMP(3),
+    news_enabled BIT(1) DEFAULT 1 NOT NULL,
+    author_id BINARY(16) NOT NULL,
+    CONSTRAINT pk_news_news_id PRIMARY KEY (news_id),
+    CONSTRAINT uq_news_headline UNIQUE(headline),
+    CONSTRAINT uq_news_summary UNIQUE(summary),
+    CONSTRAINT uq_news_body UNIQUE(news_body),
+    CONSTRAINT ck_news_news_enabled CHECK(news_enabled=0 OR news_enabled=1)
+)ENGINE=InnoDB;
+
+CREATE USER 'activity_news'@'%' IDENTIFIED BY 'Password';
+GRANT CREATE, SELECT, INSERT, DELETE ON  naat_clients. * TO 'activity_news'@'%';
+FLUSH PRIVILEGES;
