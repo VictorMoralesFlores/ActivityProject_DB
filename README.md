@@ -6,5 +6,17 @@ docker run -v /Users/vmorales/Desktop/BaseDatosMySQL/db_data:/var/lib/mysql -p 3
 ~~~
 
 ## User db:
-user: activity_user
-password: Password
+user: 
+~~~
+activity_user
+~~~
+password: 
+~~~
+Password
+~~~
+
+## News db:
+
+## ActivityRecords db:
+
+## Clients db:
