@@ -14,9 +14,16 @@ password:
 ~~~
 Password
 ~~~
-
+## Clients db:
+user: 
+~~~
+activity_client
+~~~
+password: 
+~~~
+Password
+~~~
 ## News db:
 
 ## ActivityRecords db:
 
-## Clients db:
