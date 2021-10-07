@@ -82,3 +82,68 @@ CREATE TABLE News(
 CREATE USER 'activity_news'@'%' IDENTIFIED BY 'Password';
 GRANT CREATE, SELECT, INSERT, DELETE ON  naat_clients. * TO 'activity_news'@'%';
 FLUSH PRIVILEGES;
+
+/*
+*  ACTIVITY PROJECTS DATABASE
+*/
+
+CREATE DATABASE activity_records;
+USE activity_records;
+
+/* AS AR_ACTIVITYRECORDS*/
+CREATE TABLE Projects(
+    project_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
+    project_key VARCHAR(50) NOT NULL,
+    project_name VARCHAR(80) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+    creation_date TIMESTAMP(3),
+    modification_date TIMESTAMP(3),
+    project_enabled BIT(1) DEFAULT 1 NOT NULL,
+    client_id BINARY(16) NOT NULL,
+    author_id BINARY(16) NOT NULL,
+    CONSTRAINT pk_projects_project_id PRIMARY KEY (project_id),
+    CONSTRAINT uq_projects_key UNIQUE(project_key),
+    CONSTRAINT uq_projects_project_name UNIQUE(project_name),
+    CONSTRAINT uq_projects_description UNIQUE(description),
+    CONSTRAINT ck_projects_project_enabled CHECK(project_enabled=0 OR project_enabled=1)
+)ENGINE=InnoDB;
+
+CREATE TABLE Activities(
+    activity_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
+    activity_key VARCHAR(50) NOT NULL,
+    activity_name VARCHAR(80) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+    creation_date TIMESTAMP(3),
+    modification_date TIMESTAMP(3),
+    activity_enabled BIT(1) DEFAULT 1 NOT NULL,
+    author_id BINARY(16) NOT NULL,
+    CONSTRAINT activity_pk PRIMARY KEY (activity_id),
+    CONSTRAINT uq_activities_key UNIQUE(activity_key),
+    CONSTRAINT uq_activities_activity_name UNIQUE(activity_name),
+    CONSTRAINT uq_activities_description UNIQUE(description),
+    CONSTRAINT ck_activities_activity_enabled CHECK(activity_enabled=0 OR activity_enabled=1)
+)ENGINE=InnoDB;
+
+
+
+
+CREATE TABLE ActivityRecord(
+    activity_record_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
+    activity_duration TINYINT NOT NULL,
+    activity_record_date DATE NOT NULL,
+    creation_date TIMESTAMP(3),
+    modification_date TIMESTAMP(3),
+    activity_record_enabled BIT(1) DEFAULT 1 NOT NULL,
+    project_id BINARY(16) NOT NULL,
+    user_id BINARY(16) NOT NULL,
+    activity_id BINARY(16) NOT NULL,
+    CONSTRAINT pk_activity_record_activity_record_id PRIMARY KEY (activity_record_id),
+    CONSTRAINT fk_project FOREIGN KEY (project_id) REFERENCES projects(project_id),
+    CONSTRAINT fk_activity FOREIGN KEY (activity_id ) REFERENCES activities(activity_id),
+    CONSTRAINT ck_activity_record_activity_record_enabled CHECK(activity_record_enabled=0 OR activity_record_enabled=1),
+    CONSTRAINT ck_activity_record_duration CHECK (activity_duration>=0 and activity_duration <=24)
+)ENGINE=InnoDB;
+
+CREATE USER 'record_user'@'%' IDENTIFIED BY 'Password';
+GRANT CREATE, SELECT, INSERT, DELETE ON  activity_records. * TO 'record_user'@'%';
+FLUSH PRIVILEGES;
