@@ -1,0 +1,15 @@
+# Archivos temporales mysql innodb db_data/
+db_data/#innodb_temp/
+
+# doublewrite buffer [InnoDB Storage area writes pages flushed]
+*.dblwr
+
+# Archivos temporales
+*tmp*
+
+# Logs db_data mysql db_data/
+db_data/binlog.*
+*log*
+
+# db_data/undo mysql
+db_data/undo*
