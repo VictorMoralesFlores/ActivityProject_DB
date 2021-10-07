@@ -3,7 +3,7 @@
 ## Para ejecutar 
 Dentro de su repositorio utilizar el siguiente comando
 ~~~
-./init_image.sh'
+./init_image.sh
 ~~~
 
 Esto creara un contenedor docker con la imagen **mysql/mysql-server** con las siguientes caracteristicas:
