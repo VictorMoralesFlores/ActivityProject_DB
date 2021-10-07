@@ -1,11 +1,10 @@
 # Base de datos MySQL
 
 ## Para ejecutar 
-~~~
 Dentro de su repositorio utilizar el siguiente comando
-```
+~~~
 ./init_image.sh'
-```
+~~~
 
 Esto creara un contenedor docker con la imagen **mysql/mysql-server** con las siguientes caracteristicas:
 - Puerto: 3306
@@ -13,13 +12,10 @@ Esto creara un contenedor docker con la imagen **mysql/mysql-server** con las si
 
 ## mysql
 A su vez, abrira el prompt del contenedor en caso de revisión o edición de las bases de datos
-```
-mysql -u [user] -p[password] -e[sqlstatement]
-```
-
-Nota: En caso de querer poner el password en el comando, va junto a la **-p**
-
 ~~~
+mysql -u [user] -p[password] -e[sqlstatement]
+~~~
+Nota: En caso de querer poner el password en el comando, va junto a la **-p**
 
 ## User db:
 ### Data base name:
