@@ -27,7 +27,7 @@ CREATE TABLE Users(
     CONSTRAINT ck_user_user_enabled CHECK(user_enabled=0 OR user_enabled=1)
 ) ENGINE=InnoDB;
 CREATE USER 'activity_user'@'%' IDENTIFIED BY 'Password';
-GRANT CREATE, SELECT, INSERT, DELETE ON  naat_users. * TO 'activity_user'@'%';
+GRANT CREATE, SELECT, INSERT, UPDATE, DELETE ON  naat_users. * TO 'activity_user'@'%';
 FLUSH PRIVILEGES;
 
 
@@ -55,7 +55,7 @@ CREATE TABLE Clients (
 ) ENGINE=InnoDB;
 
 CREATE USER 'activity_client'@'%' IDENTIFIED BY 'Password';
-GRANT CREATE, SELECT, INSERT, DELETE ON  naat_clients. * TO 'activity_client'@'%';
+GRANT CREATE, SELECT, INSERT, UPDATE,  DELETE ON  naat_clients. * TO 'activity_client'@'%';
 FLUSH PRIVILEGES;
 
 
@@ -83,7 +83,7 @@ CREATE TABLE News(
 )ENGINE=InnoDB;
 
 CREATE USER 'activity_news'@'%' IDENTIFIED BY 'Password';
-GRANT CREATE, SELECT, INSERT, DELETE ON  naat_news. * TO 'activity_news'@'%';
+GRANT CREATE, SELECT, INSERT, UPDATE,  DELETE ON  naat_news. * TO 'activity_news'@'%';
 FLUSH PRIVILEGES;
 
 /*
@@ -149,5 +149,5 @@ CREATE TABLE ActivityRecord(
 )ENGINE=InnoDB;
 
 CREATE USER 'record_user'@'%' IDENTIFIED BY 'Password';
-GRANT CREATE, SELECT, INSERT, DELETE ON  activity_records. * TO 'record_user'@'%';
+GRANT CREATE, SELECT, INSERT, UPDATE, DELETE ON  activity_records. * TO 'record_user'@'%';
 FLUSH PRIVILEGES;
