@@ -1,6 +1,7 @@
 /*
 *   USER AND ROLE TABLES        
 */
+DROP DATABASE IF EXISTS naat_users;
 CREATE DATABASE naat_users;
 USE naat_users;
 CREATE TABLE Roles(
@@ -14,11 +15,11 @@ CREATE TABLE Users(
     user_name VARCHAR(40) NOT NULL,
     last_name VARCHAR(70) NOT NULL,
     email VARCHAR(60) NOT NULL,
-    vacation_start TIMESTAMP(3),
-    vacation_ending TIMESTAMP(3),
+    vacation_start TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    vacation_ending TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     user_enabled BIT(1) DEFAULT 1,
-    creation_date TIMESTAMP(3) ,
-    modification_date TIMESTAMP(3),
+    creation_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    modification_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     role_id VARCHAR(20) NOT NULL,
     CONSTRAINT pk_users_user_id PRIMARY KEY(user_id),
     CONSTRAINT fk_users_role_id FOREIGN KEY(role_id) REFERENCES roles(role_id),
@@ -33,6 +34,7 @@ FLUSH PRIVILEGES;
 /*
 *    CLIENTS DATABASE
 */
+DROP DATABASE IF EXISTS naat_clients;
 CREATE DATABASE naat_clients;
 USE naat_clients;
 
@@ -41,8 +43,8 @@ CREATE TABLE Clients (
     client_key VARCHAR(20) NOT NULL,
     client_name VARCHAR(30) NOT NULL,
     description VARCHAR(100) NOT NULL,
-    creation_date TIMESTAMP(3),
-    modification_date TIMESTAMP(3),
+    creation_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    modification_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     client_enabled BIT(1) DEFAULT 1 NOT NULL,
     author_id BINARY(16) NOT NULL,
     CONSTRAINT pk_clients_client PRIMARY KEY(client_id),
@@ -60,6 +62,7 @@ FLUSH PRIVILEGES;
 /*
 *    NEWS DATABASE
 */
+DROP DATABASE IF EXISTS naat_news;
 CREATE DATABASE naat_news;
 USE naat_news;
 CREATE TABLE News(
@@ -68,8 +71,8 @@ CREATE TABLE News(
     summary VARCHAR(300) NOT NULL,
     news_body VARCHAR(500) NOT NULL,
     image VARCHAR(100),
-    creation_date TIMESTAMP(3),
-    modification_date TIMESTAMP(3),
+    creation_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    modification_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     news_enabled BIT(1) DEFAULT 1 NOT NULL,
     author_id BINARY(16) NOT NULL,
     CONSTRAINT pk_news_news_id PRIMARY KEY (news_id),
@@ -87,6 +90,7 @@ FLUSH PRIVILEGES;
 *  ACTIVITY PROJECTS DATABASE
 */
 
+DROP DATABASE IF EXISTS activity_records;
 CREATE DATABASE activity_records;
 USE activity_records;
 
@@ -96,8 +100,8 @@ CREATE TABLE Projects(
     project_key VARCHAR(50) NOT NULL,
     project_name VARCHAR(80) NOT NULL,
     description VARCHAR(150) NOT NULL,
-    creation_date TIMESTAMP(3),
-    modification_date TIMESTAMP(3),
+    creation_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    modification_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     project_enabled BIT(1) DEFAULT 1 NOT NULL,
     client_id BINARY(16) NOT NULL,
     author_id BINARY(16) NOT NULL,
@@ -113,8 +117,8 @@ CREATE TABLE Activities(
     activity_key VARCHAR(50) NOT NULL,
     activity_name VARCHAR(80) NOT NULL,
     description VARCHAR(150) NOT NULL,
-    creation_date TIMESTAMP(3),
-    modification_date TIMESTAMP(3),
+    creation_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    modification_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     activity_enabled BIT(1) DEFAULT 1 NOT NULL,
     author_id BINARY(16) NOT NULL,
     CONSTRAINT activity_pk PRIMARY KEY (activity_id),
@@ -131,8 +135,8 @@ CREATE TABLE ActivityRecord(
     activity_record_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
     activity_duration TINYINT NOT NULL,
     activity_record_date DATE NOT NULL,
-    creation_date TIMESTAMP(3),
-    modification_date TIMESTAMP(3),
+    creation_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    modification_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     activity_record_enabled BIT(1) DEFAULT 1 NOT NULL,
     project_id BINARY(16) NOT NULL,
     user_id BINARY(16) NOT NULL,
