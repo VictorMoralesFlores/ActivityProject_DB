@@ -1,8 +1,20 @@
-# Base de datos
+# Base de datos MySQL
 
-Para ejecutar 
+## Para ejecutar 
 ~~~
-docker run -v /Users/vmorales/Desktop/BaseDatosMySQL/db_data:/var/lib/mysql -p 3306:3306 -d --name naatDB mysql/mysql-server  
+Dentro de su repositorio utilizar el siguiente comando
+'./init_image.sh'
+
+Esto creara un contenedor docker con la imagen **mysql/mysql-server** con las siguientes caracteristicas:
+* Puerto: 3306
+* Nombre de contenedor: naat-tech-db
+
+## mysql
+A su vez, abrira el prompt del contenedor en caso de revisión o edición de las bases de datos
+'mysql -u [user] -p[password] -e[sqlstatement]'
+
+Nota: En caso de querer poner el password en el comando, va junto a la **-p**
+
 ~~~
 
 ## User db:

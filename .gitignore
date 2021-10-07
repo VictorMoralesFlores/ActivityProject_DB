@@ -13,3 +13,7 @@ db_data/binlog.*
 
 # db_data/undo mysql
 db_data/undo*
+
+# db_data sockets
+db_data/mysql.sock.lock
+db_data/*sock*
