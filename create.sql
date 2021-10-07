@@ -80,7 +80,7 @@ CREATE TABLE News(
 )ENGINE=InnoDB;
 
 CREATE USER 'activity_news'@'%' IDENTIFIED BY 'Password';
-GRANT CREATE, SELECT, INSERT, DELETE ON  naat_clients. * TO 'activity_news'@'%';
+GRANT CREATE, SELECT, INSERT, DELETE ON  naat_news. * TO 'activity_news'@'%';
 FLUSH PRIVILEGES;
 
 /*

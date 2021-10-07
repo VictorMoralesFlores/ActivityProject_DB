@@ -154,9 +154,6 @@ CREATE TABLE Activities(
     CONSTRAINT ck_activities_activity_enabled CHECK(activity_enabled=0 OR activity_enabled=1)
 )ENGINE=InnoDB;
 
-
-
-
 CREATE TABLE ActivityRecord(
     activity_record_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
     activity_duration TINYINT NOT NULL,
