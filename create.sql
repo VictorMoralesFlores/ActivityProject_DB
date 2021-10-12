@@ -65,11 +65,12 @@ FLUSH PRIVILEGES;
 DROP DATABASE IF EXISTS naat_news;
 CREATE DATABASE naat_news;
 USE naat_news;
+
 CREATE TABLE News(
     news_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
     headline VARCHAR(200) NOT NULL,
-    summary VARCHAR(300) NOT NULL,
-    news_body VARCHAR(500) NOT NULL,
+    summary TEXT NOT NULL,
+    news_body TEXT NOT NULL,
     image VARCHAR(100),
     creation_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     modification_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
@@ -77,10 +78,12 @@ CREATE TABLE News(
     author_id BINARY(16) NOT NULL,
     CONSTRAINT pk_news_news_id PRIMARY KEY (news_id),
     CONSTRAINT uq_news_headline UNIQUE(headline),
-    CONSTRAINT uq_news_summary UNIQUE(summary),
-    CONSTRAINT uq_news_body UNIQUE(news_body),
+    CONSTRAINT uq_news_summary UNIQUE(summary(500)),
+    CONSTRAINT uq_news_body UNIQUE(news_body(500)),
     CONSTRAINT ck_news_news_enabled CHECK(news_enabled=0 OR news_enabled=1)
 )ENGINE=InnoDB;
+
+
 
 CREATE USER 'activity_news'@'%' IDENTIFIED BY 'Password';
 GRANT CREATE, SELECT, INSERT, UPDATE,  DELETE ON  naat_news. * TO 'activity_news'@'%';

@@ -1,6 +1,6 @@
 # Base de datos MySQL
 
-## Para ejecutar 
+## Para ejecutar
 Dentro de su repositorio utilizar el siguiente comando
 ~~~
 ./init_image.sh
@@ -22,7 +22,7 @@ Nota: En caso de querer poner el password en el comando, va junto a la **-p**
 ~~~
 naat_users
 ~~~
-### User: 
+### User:
 ~~~
 activity_user
 ~~~
@@ -56,7 +56,7 @@ CREATE TABLE Users(
 ~~~
 naat_clients
 ~~~
-### User: 
+### User:
 ~~~
 activity_client
 ~~~
@@ -89,7 +89,7 @@ CREATE TABLE Clients (
 ~~~
 naat_news
 ~~~
-### User: 
+### User:
 ~~~
 activity_news
 ~~~
@@ -102,17 +102,17 @@ Password
 CREATE TABLE News(
     news_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
     headline VARCHAR(200) NOT NULL,
-    summary VARCHAR(300) NOT NULL,
-    news_body VARCHAR(500) NOT NULL,
+    summary TEXT NOT NULL,
+    news_body TEXT NOT NULL,
     image VARCHAR(100),
-    creation_date TIMESTAMP(3),
-    modification_date TIMESTAMP(3),
+    creation_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    modification_date TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
     news_enabled BIT(1) DEFAULT 1 NOT NULL,
     author_id BINARY(16) NOT NULL,
     CONSTRAINT pk_news_news_id PRIMARY KEY (news_id),
     CONSTRAINT uq_news_headline UNIQUE(headline),
-    CONSTRAINT uq_news_summary UNIQUE(summary),
-    CONSTRAINT uq_news_body UNIQUE(news_body),
+    CONSTRAINT uq_news_summary UNIQUE(summary(500)),
+    CONSTRAINT uq_news_body UNIQUE(news_body(500)),
     CONSTRAINT ck_news_news_enabled CHECK(news_enabled=0 OR news_enabled=1)
 )ENGINE=InnoDB;
 ~~~
@@ -123,7 +123,7 @@ CREATE TABLE News(
 ~~~
 activity_records
 ~~~
-### User: 
+### User:
 ~~~
 record_user
 ~~~
